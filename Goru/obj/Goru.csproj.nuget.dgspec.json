@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\ifari\\RiderProjects\\Goru\\Goru\\Goru.csproj": {}
+    "C:\\Users\\ifari\\Desktop\\Goru\\Goru\\Goru.csproj": {}
   },
   "projects": {
-    "C:\\Users\\ifari\\RiderProjects\\Goru\\Goru\\Goru.csproj": {
+    "C:\\Users\\ifari\\Desktop\\Goru\\Goru\\Goru.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\ifari\\RiderProjects\\Goru\\Goru\\Goru.csproj",
+        "projectUniqueName": "C:\\Users\\ifari\\Desktop\\Goru\\Goru\\Goru.csproj",
         "projectName": "Goru",
-        "projectPath": "C:\\Users\\ifari\\RiderProjects\\Goru\\Goru\\Goru.csproj",
+        "projectPath": "C:\\Users\\ifari\\Desktop\\Goru\\Goru\\Goru.csproj",
         "packagesPath": "C:\\Users\\ifari\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\ifari\\RiderProjects\\Goru\\Goru\\obj\\",
+        "outputPath": "C:\\Users\\ifari\\Desktop\\Goru\\Goru\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\ifari\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -40,6 +40,12 @@
       "frameworks": {
         "net8.0": {
           "targetAlias": "net8.0",
+          "dependencies": {
+            "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
+              "target": "Package",
+              "version": "[8.0.2, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",

@@ -3,11 +3,11 @@ using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using Goru.Models;
 
-public class fourOfourController : Controller
+public class PagesController : Controller
 {
     public IActionResult Index()
     {
-        return View("fourOfour");
+        return View();
     }
 
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

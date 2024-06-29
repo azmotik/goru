@@ -9,7 +9,7 @@ public class ShopController : Controller
 {
     public IActionResult Index()
     {
-        return View("shop");
+        return View();
     }
     
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

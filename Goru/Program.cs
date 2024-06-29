@@ -21,7 +21,7 @@ app.UseRouting();
 app.UseAuthorization();
 
 app.MapControllerRoute(
-    name: "default",
+    name: "AdminPanel",
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
 app.Run();

@@ -7,7 +7,7 @@ public class BlogController : Controller
 {
     public IActionResult Index()
     {
-        return View("blog");
+        return View();
     }
     
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

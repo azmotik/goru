@@ -1,59 +1,67 @@
 is_global = true
 build_property.TargetFramework = net8.0
+build_property.TargetFramework = net8.0
+build_property.TargetPlatformMinVersion = 
 build_property.TargetPlatformMinVersion = 
 build_property.UsingMicrosoftNETSdkWeb = true
+build_property.UsingMicrosoftNETSdkWeb = true
+build_property.ProjectTypeGuids = 
 build_property.ProjectTypeGuids = 
 build_property.InvariantGlobalization = 
+build_property.InvariantGlobalization = 
+build_property.PlatformNeutralAssembly = 
 build_property.PlatformNeutralAssembly = 
 build_property.EnforceExtendedAnalyzerRules = 
+build_property.EnforceExtendedAnalyzerRules = 
+build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = Goru
 build_property.RootNamespace = Goru
-build_property.ProjectDir = C:\Users\ifari\RiderProjects\Goru\Goru\
+build_property.ProjectDir = C:\Users\ifari\Desktop\Goru\Goru\
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 
 build_property.RazorLangVersion = 8.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = C:\Users\ifari\RiderProjects\Goru\Goru
+build_property.MSBuildProjectDirectory = C:\Users\ifari\Desktop\Goru\Goru
 build_property._RazorSourceGeneratorDebug = 
 
-[C:/Users/ifari/RiderProjects/Goru/Goru/Views/Blog/blog.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQmxvZ1xibG9nLmNzaHRtbA==
+[C:/Users/ifari/Desktop/Goru/Goru/Views/Blog/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQmxvZ1xJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ifari/RiderProjects/Goru/Goru/Views/fourOfour/fourOfour.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcZm91ck9mb3VyXGZvdXJPZm91ci5jc2h0bWw=
+[C:/Users/ifari/Desktop/Goru/Goru/Views/Contact/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29udGFjdFxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ifari/RiderProjects/Goru/Goru/Views/Home/home.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxob21lLmNzaHRtbA==
+[C:/Users/ifari/Desktop/Goru/Goru/Views/Home/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ifari/RiderProjects/Goru/Goru/Views/Home/Privacy.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
+[C:/Users/ifari/Desktop/Goru/Goru/Views/Pages/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGFnZXNcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ifari/RiderProjects/Goru/Goru/Views/Shared/Error.cshtml]
+[C:/Users/ifari/Desktop/Goru/Goru/Views/Shared/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ifari/RiderProjects/Goru/Goru/Views/Shared/_ValidationScriptsPartial.cshtml]
+[C:/Users/ifari/Desktop/Goru/Goru/Views/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ifari/RiderProjects/Goru/Goru/Views/Shop/shop.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hvcFxzaG9wLmNzaHRtbA==
+[C:/Users/ifari/Desktop/Goru/Goru/Views/Shop/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hvcFxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ifari/RiderProjects/Goru/Goru/Views/_ViewImports.cshtml]
+[C:/Users/ifari/Desktop/Goru/Goru/Views/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ifari/RiderProjects/Goru/Goru/Views/_ViewStart.cshtml]
+[C:/Users/ifari/Desktop/Goru/Goru/Views/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ifari/RiderProjects/Goru/Goru/Views/Shared/_Layout.cshtml]
+[C:/Users/ifari/Desktop/Goru/Goru/Views/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = b-723s0tegat
