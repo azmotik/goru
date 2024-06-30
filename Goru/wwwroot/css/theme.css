@@ -1831,8 +1831,7 @@ footer.inner-footer{
 }
 .grayscale iframe{
     -webkit-filter: grayscale(100%); 
-    -moz-filter: grayscale(100%); 
-    -ms-filter: grayscale(100%); 
+    -moz-filter: grayscale(100%);
     filter: grayscale(100%);
 }
 .contact-form{
@@ -4482,7 +4481,6 @@ body.menu_open{
 }
 .menu_popup > ul > li {
     opacity: 0;
-    -webkit-transition: translateY(80px);
     transform: translateY(80px);
 }
 .menu_popup ul li ul.sub-menu {
@@ -4609,11 +4607,6 @@ body.menu_open{
 .popup_menu.active .bottom_menu{
     z-index: 99;
 }
-
-.trending-section{
-    background-image: url("images/home/shape2.png");
-}
-
 /*------------------------------------------------------------------------------------
 / 14. Preloader
 /-------------------------------------------------------------------------------------*/

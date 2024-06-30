@@ -1,0 +1,1 @@
+﻿$(function(){$(document).trigger("enhance.tablesaw"),document.querySelectorAll(".tablesaw thead").forEach(function(e){e.classList.add("table-light")})});

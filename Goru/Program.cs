@@ -13,7 +13,7 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
-app.UseHttpsRedirection();
+//app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
@@ -21,7 +21,16 @@ app.UseRouting();
 app.UseAuthorization();
 
 app.MapControllerRoute(
-    name: "AdminPanel",
+    name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
+
+app.MapControllerRoute(
+    name: "FourOFour",
+    pattern: "{controller=Home}/{action=FourOFour}/{id?}");
+
+app.MapControllerRoute(
+    name: "AdminPanel",
+    pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
+
 
 app.Run();
