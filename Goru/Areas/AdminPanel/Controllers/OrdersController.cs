@@ -5,7 +5,7 @@ using Goru.Areas.AdminPanel.Models;
 [Area("AdminPanel")]
 public class OrdersController : Controller
 {
-    
+    // TODO: должно быть 103 штуки товаров и добавить поле Артикул
     private List<Order> orders = new List<Order>()
     {
         new Order() { Name = "Gaming Headset", Price = 42, Size="XS", Offer = 10, Category = "Headphones"},
@@ -22,9 +22,17 @@ public class OrdersController : Controller
         new Order() { Name = "Bluetooth Earphones", Price = 50, Size="X", Offer = 10, Category = "Headphones"}
     };
     
-    public IActionResult Index()
+    // TODO: реализовать поиск по всем полям (подсказка: linq Where)
+    // TODO: реализовать пагинацию (т.е. возвожмость ходить по номерам страницы)
+    [HttpGet]
+    public IActionResult Index([FromQuery]int limit = 5)
     {
-        return View();
+        OrdersVm result = new OrdersVm
+        {
+            Limit = limit,
+            Orders = orders.Take(limit).ToList()
+        };
+        
+        return View(result);
     }
-    
 }
