@@ -4,6 +4,8 @@
     {
         public List<Order> Orders = new();
         
-        public int Limit { get; set; }
+        public Pagination Pagination = new();
+        
+        public string Searching { get; set; }
     }
 }

@@ -7,6 +7,7 @@ namespace Goru.Areas.AdminPanel.Controllers
     [Area("AdminPanel")]
     public class OrdersController : Controller
     {
+        #region Orders
         private List<Order> Orders = new()
         {
             new Order() { Article = 47431, Name = "Gaming Headset", Price = 42, Size="XS", Offer = 10, Category = "Headphones"},
@@ -112,30 +113,36 @@ namespace Goru.Areas.AdminPanel.Controllers
             new Order() { Article = 18331, Name = "Gaming Headset", Price = 45, Size="XS", Offer = 10, Category = "Headphones"},
             new Order() { Article = 13871, Name = "Wireless Headset", Price = 40, Size="XS", Offer = 0, Category = "Headphones"},
         };
+        #endregion
         
         // TODO: реализовать пагинацию (т.е. возвожмость ходить по номерам страницы)
         [HttpGet]
-        public IActionResult Index(string searching, [FromQuery]int limit = 5)
+        public IActionResult Index([FromQuery]string searching, [FromQuery]int limit = 5, [FromQuery]int page = 1)
         {
-            OrdersVm result = new OrdersVm
-            {
-                Limit = limit,
-                Orders = Orders.Take(limit).ToList()
-            };
-
+            IEnumerable<Order> query = Orders;
+            
             if (!String.IsNullOrEmpty(searching))
             {
-                OrdersVm search = new OrdersVm
+                query = query.Where(order => order.Article.ToString().Contains(searching) ||
+                                              order.Name.Contains(searching) ||
+                                              order.Price.ToString().Contains(searching) ||
+                                              order.Offer.ToString().Contains(searching) ||
+                                              order.Size.Contains(searching) || order.Category.Contains(searching));
+            }
+            
+            OrdersVm result = new OrdersVm
+            {
+                Pagination = new Pagination()
                 {
                     Limit = limit,
-                    Orders = Orders.Where(order => order.Article.ToString().Contains(searching) || order.Name.Contains(searching) || order.Price.ToString().Contains(searching) || order.Offer.ToString().Contains(searching) || order.Size.Contains(searching) || order.Category.Contains(searching)).ToList()
-                };
-                
-                return View(search);
-            }
-            return View(result);
-
+                    Page = page,
+                    Total = query.Count()
+                },
+                Searching = searching,
+                Orders = query.Skip((page - 1) * limit).Take(limit).ToList()
+            };
             
+            return View(result);
         }
     }
 }

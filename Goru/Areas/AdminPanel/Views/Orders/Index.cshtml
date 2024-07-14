@@ -5,6 +5,8 @@
 @{
     Layout = "~/Areas/AdminPanel/Views/Shared/_Layout.cshtml";
     short[] arr = [5, 10, 15, 20, 25];
+
+    int from  = (Model.Pagination.Page - 1) * Model.Pagination.Limit + 1, to = from + Model.Pagination.Limit - 1;
 }
 
 <div class="content">
@@ -15,7 +17,7 @@
                 <div class="card">
                     <div class="card-body">
                         <div id="datatable_wrapper" class="dataTables_wrapper dt-bootstrap5 no-footer">
-                            <form method="get" >
+                            <form method="get" asp-area="AdminPanel" asp-action="Index" asp-controller="Orders">
                                 <div class="row">
                                         <div class="col-sm-12 col-md-6">
                                             <div class="dataTables_length" id="datatable_length">
@@ -23,7 +25,7 @@
                                                     Show
                                                     <select name="limit" class="form-select form-select-sm" onchange="this.form.submit()">
                                                         @foreach(var item in arr){
-                                                        <option selected="@(item == Model.Limit)" value="@item">@item</option>
+                                                        <option selected="@(item == Model.Pagination.Limit)" value="@item">@item</option>
                                                         }
                                                     </select> entries
                                                 </label>
@@ -33,10 +35,8 @@
                                             <div id="datatable_filter" class="dataTables_filter">
                                                 <label>
                                                     Search:
-                                                    <form asp-action="Index" asp-controller="Orders">
-                                                        <input name="searching" type="search" placeholder="Search" aria-label="Search"/>
+                                                        <input name="searching" type="search" placeholder="Search" aria-label="Search" value="@Model.Searching"/>
                                                         <button type="submit">Search</button>
-                                                    </form>
                                                 </label>
                                                 <a asp-area="AdminPanel" asp-action="Index" asp-controller="Orders">Back</a>
                                             </div>
@@ -51,8 +51,6 @@
                                             <th class="sorting sorting_asc" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" style="width: 258.4px;" aria-sort="ascending" aria-label="Name: activate to sort column descending">Article</th><th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" style="width: 393.4px;" aria-label="Position: activate to sort column ascending">Name</th><th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" style="width: 202.4px;" aria-label="Office: activate to sort column ascending">Price</th><th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" style="width: 102.4px;" aria-label="Age: activate to sort column ascending">Offer</th><th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" style="width: 183.4px;" aria-label="Start date: activate to sort column ascending">Size</th><th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" style="width: 161.4px;" aria-label="Salary: activate to sort column ascending">Category</th>
                                         </tr>
                                         </thead>
-
-
                                         <tbody>
                                         
                                         @foreach (var order in Model.Orders)
@@ -72,7 +70,7 @@
                             </div>
                             <div class="row">
                                 <div class="col-sm-12 col-md-5">
-                                    <div class="dataTables_info" id="datatable_info" role="status" aria-live="polite">Showing 1 to 10 of 57 entries</div>
+                                    <div class="dataTables_info" id="datatable_info" role="status" aria-live="polite">Showing @from to @to of @Model.Pagination.Total entries</div>
                                 </div>
                                 <div class="col-sm-12 col-md-7">
                                     <div class="dataTables_paginate paging_simple_numbers" id="datatable_paginate">
@@ -80,27 +78,16 @@
                                             <li class="paginate_button page-item previous disabled" id="datatable_previous">
                                                 <a href="#" aria-controls="datatable" data-dt-idx="0" tabindex="0" class="page-link">Previous</a>
                                             </li>
-                                            <li class="paginate_button page-item active">
-                                                <a href="#" aria-controls="datatable" data-dt-idx="1" tabindex="0" class="page-link">1</a>
-                                            </li>
-                                            <li class="paginate_button page-item ">
-                                                <a href="#" aria-controls="datatable" data-dt-idx="2" tabindex="0" class="page-link">2</a>
-                                            </li>
-                                            <li class="paginate_button page-item ">
-                                                <a href="#" aria-controls="datatable" data-dt-idx="3" tabindex="0" class="page-link">3</a>
-                                            </li>
-                                            <li class="paginate_button page-item ">
-                                                <a href="#" aria-controls="datatable" data-dt-idx="4" tabindex="0" class="page-link">4</a>
-                                            </li>
-                                            <li class="paginate_button page-item ">
-                                                <a href="#" aria-controls="datatable" data-dt-idx="5" tabindex="0" class="page-link">5</a>
-                                            </li>
-                                            <li class="paginate_button page-item ">
-                                                <a href="#" aria-controls="datatable" data-dt-idx="6" tabindex="0" class="page-link">6</a>
-                                            </li>
-                                            <li class="paginate_button page-item next" id="datatable_next">
-                                                <a href="#" aria-controls="datatable" data-dt-idx="7" tabindex="0" class="page-link">Next</a>
-                                            </li>
+                                            @{
+                                                int i = 1;
+                                                while(i * Model.Pagination.Limit < Model.Pagination.Total ){
+                                                    <li class="paginate_button page-item">
+                                                        <a href="@($"?search={Model.Searching}&limit={Model.Pagination.Limit}&page={i}")" aria-controls="datatable" data-dt-idx="1" tabindex="0" class="page-link">@i</a>
+                                                    </li>
+                                                    
+                                                    i++;
+                                                }
+                                            }
                                         </ul>
                                     </div>
                                 </div>

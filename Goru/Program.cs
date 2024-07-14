@@ -21,19 +21,11 @@ app.UseRouting();
 app.UseAuthorization();
 
 app.MapControllerRoute(
+    name: "area-route",
+    pattern: "{area}/{controller=Home}/{action=Index}");
+
+app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
-
-app.MapControllerRoute(
-    name: "FourOFour",
-    pattern: "{controller=Home}/{action=FourOFour}/{id?}");
-
-app.MapControllerRoute(
-    name: "AdminPanel/Home",
-    pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
-
-app.MapControllerRoute(
-    name: "AdminPanel/Orders",
-    pattern: "{area:exists}/{controller=Orders}/{action=Index}/{id?}");
+    pattern: "{controller=Home}/{action=Index}");
 
 app.Run();

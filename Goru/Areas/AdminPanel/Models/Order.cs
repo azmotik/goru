@@ -1,4 +1,6 @@
-﻿public class Order
+﻿using System.ComponentModel.DataAnnotations;
+
+public class Order
 {
     public int Article { get; set; }
     
