@@ -1,7 +1,7 @@
-﻿namespace Goru.Areas.AdminPanel.Models;
-
-public class Order
+﻿public class Order
 {
+    public int Article { get; set; }
+    
     public string Name { get; set; }
     
     public int Price { get; set; }
@@ -12,3 +12,4 @@ public class Order
     
     public string Category { get; set; }
 }
+

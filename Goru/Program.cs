@@ -29,8 +29,11 @@ app.MapControllerRoute(
     pattern: "{controller=Home}/{action=FourOFour}/{id?}");
 
 app.MapControllerRoute(
-    name: "AdminPanel",
+    name: "AdminPanel/Home",
     pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
 
+app.MapControllerRoute(
+    name: "AdminPanel/Orders",
+    pattern: "{area:exists}/{controller=Orders}/{action=Index}/{id?}");
 
 app.Run();
