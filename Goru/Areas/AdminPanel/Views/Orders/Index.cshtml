@@ -7,6 +7,7 @@
     short[] arr = [5, 10, 15, 20, 25];
 
     int from  = (Model.Pagination.Page - 1) * Model.Pagination.Limit + 1, to = from + Model.Pagination.Limit - 1;
+    int start = Model.Pagination.StartPage, end = Model.Pagination.EndPage, total = Model.Pagination.Total, limit = Model.Pagination.Limit;
 }
 
 <div class="content">
@@ -25,7 +26,7 @@
                                                     Show
                                                     <select name="limit" class="form-select form-select-sm" onchange="this.form.submit()">
                                                         @foreach(var item in arr){
-                                                        <option selected="@(item == Model.Pagination.Limit)" value="@item">@item</option>
+                                                        <option selected="@(item == limit)" value="@item">@item</option>
                                                         }
                                                     </select> entries
                                                 </label>
@@ -38,7 +39,6 @@
                                                         <input name="searching" type="search" placeholder="Search" aria-label="Search" value="@Model.Searching"/>
                                                         <button type="submit">Search</button>
                                                 </label>
-                                                <a asp-area="AdminPanel" asp-action="Index" asp-controller="Orders">Back</a>
                                             </div>
                                         </div>
                                 </div>
@@ -70,23 +70,80 @@
                             </div>
                             <div class="row">
                                 <div class="col-sm-12 col-md-5">
-                                    <div class="dataTables_info" id="datatable_info" role="status" aria-live="polite">Showing @from to @to of @Model.Pagination.Total entries</div>
+                                    @if (to > total)
+                                    {
+                                        <div class="dataTables_info" id="datatable_info" role="status" aria-live="polite">Showing @from to @total of @total entries</div>
+                                    }
+                                    else
+                                    {
+                                        <div class="dataTables_info" id="datatable_info" role="status" aria-live="polite">Showing @from to @to of @total entries</div>
+                                    }
+                                    
+                                    
                                 </div>
                                 <div class="col-sm-12 col-md-7">
                                     <div class="dataTables_paginate paging_simple_numbers" id="datatable_paginate">
                                         <ul class="pagination">
-                                            <li class="paginate_button page-item previous disabled" id="datatable_previous">
-                                                <a href="#" aria-controls="datatable" data-dt-idx="0" tabindex="0" class="page-link">Previous</a>
+                                            <li class="paginate_button page-item previous @(Model.Pagination.Page == 1 ? "disabled" : "enabled")" id="datatable_previous">
+                                                <a href="@($"?search={Model.Searching}&limit={limit}&page={Model.Pagination.Page - 1}")" aria-controls="datatable" data-dt-idx="0" tabindex="0" class="page-link">Previous</a>
                                             </li>
+                                            
+                                            @if (Model.Pagination.Page >= 5)
+                                            {
+                                                <li class="paginate_button page-item">
+                                                    <a href="@($"?search={Model.Searching}&limit={limit}&page={1}")" aria-controls="datatable" data-dt-idx="1" tabindex="0" class="page-link">1</a>
+                                                </li>
+                                                <li class="paginate_button page-item">
+                                                    <a href="@($"?search={Model.Searching}&limit={limit}&page={Model.Pagination.Page - 5}")" aria-controls="datatable" data-dt-idx="1" tabindex="0" class="page-link">...</a>
+                                                </li>
+                                            }
+                                            
                                             @{
-                                                int i = 1;
-                                                while(i * Model.Pagination.Limit < Model.Pagination.Total ){
-                                                    <li class="paginate_button page-item">
-                                                        <a href="@($"?search={Model.Searching}&limit={Model.Pagination.Limit}&page={i}")" aria-controls="datatable" data-dt-idx="1" tabindex="0" class="page-link">@i</a>
-                                                    </li>
-                                                    
-                                                    i++;
+                                                if (start <= 0)
+                                                {
+                                                    end = end - (start - 1);
+                                                    start = 1;
                                                 }
+
+                                                if (end > Model.Pagination.TotalPages)
+                                                {
+                                                    if (total % limit == 0)
+                                                    {
+                                                        end = Model.Pagination.TotalPages;
+                                                    }
+                                                    else
+                                                    {
+                                                        end = Model.Pagination.TotalPages + 1;
+                                                    }
+                                                    
+                                                    if (end > 5)
+                                                    {
+                                                        start = end - 4;
+                                                    }
+                                                }
+                                                
+                                                for (var page = start; page <= end; page++)
+                                                {
+                                                    <li class="paginate_button page-item @(page == Model.Pagination.Page ? "active" : "")">
+                                                        <a href="@($"?search={Model.Searching}&limit={limit}&page={page}")" aria-controls="datatable" data-dt-idx="1" tabindex="0" class="page-link">@(page)</a>
+                                                    </li>
+                                                }
+                                                    
+                                            }
+                                            <li class="paginate_button page-item next enabled" id="datatable_next">
+                                                <a href="@($"?search={Model.Searching}&limit={limit}&page={(total % limit == 0 ? Model.Pagination.TotalPages : Model.Pagination.TotalPages + 1)}")" aria-controls="datatable" data-dt-idx="0" tabindex="0" class="page-link">To end</a>
+                                            </li>
+                                            @if (total % limit == 0)
+                                            {
+                                                <li class="paginate_button page-item next @(Model.Pagination.Page == Model.Pagination.TotalPages ? "disabled" : "enabled")" id="datatable_next">
+                                                    <a href="@($"?search={Model.Searching}&limit={limit}&page={Model.Pagination.Page + 1}")" aria-controls="datatable" data-dt-idx="0" tabindex="0" class="page-link">Next</a>
+                                                </li>
+                                            }
+                                            else
+                                            {
+                                                <li class="paginate_button page-item next @(Model.Pagination.Page == Model.Pagination.TotalPages + 1 ? "disabled" : "enabled")" id="datatable_next">
+                                                    <a href="@($"?search={Model.Searching}&limit={limit}&page={Model.Pagination.Page + 1}")" aria-controls="datatable" data-dt-idx="0" tabindex="0" class="page-link">Next</a>
+                                                </li>
                                             }
                                         </ul>
                                     </div>

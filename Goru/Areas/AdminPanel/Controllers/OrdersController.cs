@@ -115,7 +115,7 @@ namespace Goru.Areas.AdminPanel.Controllers
         };
         #endregion
         
-        // TODO: реализовать пагинацию (т.е. возвожмость ходить по номерам страницы)
+        
         [HttpGet]
         public IActionResult Index([FromQuery]string searching, [FromQuery]int limit = 5, [FromQuery]int page = 1)
         {
@@ -134,13 +134,22 @@ namespace Goru.Areas.AdminPanel.Controllers
             {
                 Pagination = new Pagination()
                 {
+                    
                     Limit = limit,
                     Page = page,
-                    Total = query.Count()
+                    StartPage = page - 2,
+                    EndPage = page + 2,
+                    Total = query.Count(),
+                    TotalPages = query.Count() / limit,
+                    
+                    
                 },
                 Searching = searching,
                 Orders = query.Skip((page - 1) * limit).Take(limit).ToList()
             };
+            
+            
+            
             
             return View(result);
         }
