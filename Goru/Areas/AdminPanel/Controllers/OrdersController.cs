@@ -1,5 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System.Runtime.InteropServices;
+using Microsoft.AspNetCore.Mvc;
 using Goru.Areas.AdminPanel.Models;
+using Goru.Areas.AdminPanel.Models.Order;
 
 namespace Goru.Areas.AdminPanel.Controllers
 {
@@ -8,7 +10,7 @@ namespace Goru.Areas.AdminPanel.Controllers
     public class OrdersController : Controller
     {
         #region Orders
-        private List<Order> Orders = new()
+        private static List<Order> Orders = new()
         {
             new Order() { Article = 47431, Name = "Gaming Headset", Price = 42, Size="XS", Offer = 10, Category = "Headphones"},
             new Order() { Article = 73656, Name = "VRBOX Gaming", Price = 410, Size="XS", Offer = 15, Category = "VR"},
@@ -115,7 +117,12 @@ namespace Goru.Areas.AdminPanel.Controllers
         };
         #endregion
         
+        // TODO: Стелизовать страницы редактирования и создания,
+        // TODO: Поправить ошибку в пагенации со строкой поиска 
+        // TODO: Рефакторинг index. должен быть один <a>
         
+        // TODO: теория. с#. прочитай и готовым быть к вопросам статический класс, статический конструктор, статические методы
+        // TODO: теория. HTML. знать тэг <form>, <input> (все типы аттрибута type)
         [HttpGet]
         public IActionResult Index([FromQuery]string searching, [FromQuery]int limit = 5, [FromQuery]int page = 1)
         {
@@ -148,10 +155,88 @@ namespace Goru.Areas.AdminPanel.Controllers
                 Orders = query.Skip((page - 1) * limit).Take(limit).ToList()
             };
             
-            
-            
+            // TODO: Dictionary дорефакторить
+            Dictionary<string, PaginationLink> dictionary = new();
+            dictionary.Add("Preveos", new PaginationLink()
+            {
+                Href= $"?search={result.Searching}&limit={result.Pagination.Limit}&page={result.Pagination.Page - 1}"
+            });
+            for (int i = 0; i < result.Pagination.TotalPages; i++)
+            {
+                dictionary.Add( i.ToString(), new PaginationLink()
+                {
+                    Href= $"?search={result.Searching}&limit={result.Pagination.Limit}&page={i + 1}"
+                });
+            }
+            dictionary.Add("ToEnd", new PaginationLink()
+            {
+                Href= $"?search={result.Searching}&limit={result.Pagination.Limit}&page={result.Pagination.Page - 1}"
+            });
             
             return View(result);
         }
+        
+        [HttpGet]
+        public IActionResult Create()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Add(CreateOrderVM payload)
+        {
+            Orders.Add(new Order()
+            {
+                Offer = payload.Offer,
+                Article = payload.Article,
+                Category = payload.Category,
+                Name = payload.Name,
+                Price = payload.Price,
+                Size = payload.Size,
+            });
+            
+            return View("Index");
+        }
+        
+        
+        // GET: AdminPanel/Orders/23424/edit
+        [HttpGet("{article}/edit")]
+        public IActionResult Edit([FromRoute]int article)
+        {
+            // TODO: Логика получения данных о товаре для заполнения формы
+            
+            // return View( updateOrderVM );
+            return View();
+        }
+        
+        [HttpPut]
+        public IActionResult SaveChanges()
+        {
+            // TODO: Написать логику изменения о товаре Артикль брать из роута
+            
+            return View();
+        }
+        
+        [HttpGet]
+        public IActionResult Delete(int article)
+        {
+            var order = Orders.FirstOrDefault(p => p.Article == article);
+            if (order != null)
+            {
+                Orders.Remove(order);
+            }
+            
+            return Redirect("Index");
+        }
+
     }
+}
+
+
+
+    
+public class PaginationLink{
+    public string Href { get; set; }
+    public bool IsActive { get; set; }
+    public bool IsEnabled { get; set; }
 }

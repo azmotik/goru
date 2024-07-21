@@ -1,0 +1,17 @@
+﻿@model Goru.Areas.AdminPanel.Models.Order.CreateOrderVM
+
+@{
+    Layout = "~/Areas/AdminPanel/Views/Shared/_Layout.cshtml";
+}
+
+@using(Html.BeginForm("Add", "Orders", FormMethod.Post))
+{
+    @Html.TextBoxFor(m => m.Article)
+    <input type="text" placeholder="Введите Category" name="category"/>
+    <input type="text" placeholder="Введите Name" name="name" />
+    <input type="text" placeholder="Введите Offer" name="offer" />
+    <input type="text" placeholder="Введите Price" name="price" />
+    <input type="text" placeholder="Введите Size" name="size" />
+
+    <input type="submit" value="Добавить"/>
+}

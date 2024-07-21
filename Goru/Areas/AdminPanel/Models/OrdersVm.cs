@@ -2,7 +2,7 @@
 {
     public class OrdersVm
     {
-        public List<Order> Orders = new();
+        public List<global::Order> Orders = new();
         
         public Pagination Pagination = new();
         
