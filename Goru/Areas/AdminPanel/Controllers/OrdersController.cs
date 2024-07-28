@@ -119,7 +119,6 @@ namespace Goru.Areas.AdminPanel.Controllers
         
         // TODO: Стелизовать страницы редактирования и создания,
         // TODO: Поправить ошибку в пагенации со строкой поиска 
-        // TODO: Рефакторинг index. должен быть один <a>
         
         // TODO: теория. с#. прочитай и готовым быть к вопросам статический класс, статический конструктор, статические методы
         // TODO: теория. HTML. знать тэг <form>, <input> (все типы аттрибута type)
@@ -147,32 +146,75 @@ namespace Goru.Areas.AdminPanel.Controllers
                     StartPage = page - 2,
                     EndPage = page + 2,
                     Total = query.Count(),
-                    TotalPages = query.Count() / limit,
-                    
-                    
+                    TotalPages = query.Count() % limit == 0 ? query.Count() / limit : query.Count() / limit + 1,
                 },
                 Searching = searching,
                 Orders = query.Skip((page - 1) * limit).Take(limit).ToList()
             };
             
-            // TODO: Dictionary дорефакторить
-            Dictionary<string, PaginationLink> dictionary = new();
-            dictionary.Add("Preveos", new PaginationLink()
+            if (result.Pagination.StartPage <= 0)
             {
-                Href= $"?search={result.Searching}&limit={result.Pagination.Limit}&page={result.Pagination.Page - 1}"
-            });
-            for (int i = 0; i < result.Pagination.TotalPages; i++)
+                result.Pagination.EndPage -= (result.Pagination.StartPage - 1);
+                result.Pagination.StartPage = 1;
+            }
+
+            if (result.Pagination.EndPage > result.Pagination.TotalPages)
             {
-                dictionary.Add( i.ToString(), new PaginationLink()
+                if (result.Pagination.Total % result.Pagination.Limit == 0)
                 {
-                    Href= $"?search={result.Searching}&limit={result.Pagination.Limit}&page={i + 1}"
+                    result.Pagination.EndPage = result.Pagination.TotalPages;
+                }
+                else
+                {
+                    result.Pagination.EndPage = result.Pagination.TotalPages + 1;
+                }
+
+                if (result.Pagination.EndPage > 5)
+                {
+                    result.Pagination.StartPage = result.Pagination.EndPage - 4;
+                }
+            }
+            
+            
+            Dictionary<string, PaginationLink> dictionary = new();
+            dictionary.Add("Previous", new PaginationLink()
+            {
+                Href= $"?search={result.Searching}&limit={result.Pagination.Limit}&page={result.Pagination.Page - 1}",
+                IsEnabled = page != 1 ? " enabled" : " disabled",
+            });
+            if (result.Pagination.Page >= 4)
+            {
+                dictionary.Add("ToStart", new PaginationLink()
+                {
+                    Href = $"?search={result.Searching}&limit={limit}&page={1}",
+                    IsEnabled = page != 1 ? " enabled" : " disabled",
+                });
+                dictionary.Add("...", new PaginationLink()
+                {
+                    Href = $"?search={result.Searching}&limit={limit}&page={result.Pagination.Page - 5}"
+                });
+
+            }
+            for (var i = result.Pagination.StartPage; i < result.Pagination.EndPage; i++)
+            {
+                dictionary.Add(i.ToString(), new PaginationLink()
+                {
+                    Href= $"?search={result.Searching}&limit={result.Pagination.Limit}&page={i}",
+                    IsActive = i == result.Pagination.Page ? " active" : ""
                 });
             }
             dictionary.Add("ToEnd", new PaginationLink()
             {
-                Href= $"?search={result.Searching}&limit={result.Pagination.Limit}&page={result.Pagination.Page - 1}"
+                Href= $"?search={result.Searching}&limit={result.Pagination.Limit}&page={result.Pagination.TotalPages}",
+                IsEnabled = page != result.Pagination.TotalPages ? " enabled" : " disabled",
             });
-            
+            dictionary.Add("Next", new PaginationLink()
+            {
+                Href= $"?search={result.Searching}&limit={result.Pagination.Limit}&page={result.Pagination.Page + 1}",
+                IsEnabled = page != result.Pagination.TotalPages ? " enabled" : " disabled",
+            });
+
+            ViewBag.dictionary = dictionary;
             return View(result);
         }
         
@@ -237,6 +279,6 @@ namespace Goru.Areas.AdminPanel.Controllers
     
 public class PaginationLink{
     public string Href { get; set; }
-    public bool IsActive { get; set; }
-    public bool IsEnabled { get; set; }
+    public string IsActive { get; set; }
+    public string IsEnabled { get; set; }
 }

@@ -4,14 +4,42 @@
     Layout = "~/Areas/AdminPanel/Views/Shared/_Layout.cshtml";
 }
 
+
 @using(Html.BeginForm("Add", "Orders", FormMethod.Post))
 {
-    @Html.TextBoxFor(m => m.Article)
-    <input type="text" placeholder="Введите Category" name="category"/>
-    <input type="text" placeholder="Введите Name" name="name" />
-    <input type="text" placeholder="Введите Offer" name="offer" />
-    <input type="text" placeholder="Введите Price" name="price" />
-    <input type="text" placeholder="Введите Size" name="size" />
+    <div class="create-order-form">
+        <p>
+            <label>Артикул</label><br/>
+            @Html.TextBoxFor(m => m.Article)
+        </p>
+        <br/>
+        <p>
+            <label>Категория</label><br/>
+            @Html.TextBoxFor(m => m.Category)
+        </p>
+        <br/>
+        <p>
+            <label>Название</label><br/>
+            @Html.TextBoxFor(m => m.Name)
+        </p>
+        <br/>
+        <p>
+            <label>Размер скидки</label><br/>
+            @Html.TextBoxFor(m => m.Offer)
+        </p>
+        <br/>
+        <p>
+            <label>Цена</label><br/>
+            @Html.TextBoxFor(m => m.Price)
+        </p>
+        <br/>
+        <p>
+            <label>Размер(S, M, L, XL...)</label><br/>
+            @Html.TextBoxFor(m => m.Size)
+        </p>
+        
 
-    <input type="submit" value="Добавить"/>
+        <input type="submit" value="Добавить"/>
+    </div>
 }
+

@@ -2,20 +2,33 @@
 
 public class CreateOrderVM
 {
-    // TODO: ДОбавить комментарии во все модельки
-    
     /// <summary>
     /// Артикль товара
     /// </summary>
     public int Article { get; set; }
     
+    /// <summary>
+    /// Название товара
+    /// </summary>
     public string Name { get; set; }
     
+    /// <summary>
+    /// Цена товара
+    /// </summary>
     public int Price { get; set; }
     
+    /// <summary>
+    /// Размер товара
+    /// </summary>
     public string Size { get; set; }
     
+    /// <summary>
+    /// Скидка на товар
+    /// </summary>
     public float Offer { get; set; }
     
+    /// <summary>
+    /// Категория товара
+    /// </summary>
     public string Category { get; set; }
 }
