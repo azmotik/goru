@@ -1,4 +1,6 @@
-﻿namespace Goru.Areas.AdminPanel.Models.Order;
+﻿using Goru.Areas.AdminPanel.Enums;
+
+namespace Goru.Areas.AdminPanel.Models.Order;
 
 public class CreateOrderVM
 {
@@ -20,7 +22,7 @@ public class CreateOrderVM
     /// <summary>
     /// Размер товара
     /// </summary>
-    public string Size { get; set; }
+    public SizeEnum Size { get; set; }
     
     /// <summary>
     /// Скидка на товар

@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using Goru.Areas.AdminPanel.Enums;
 
 public class Order
 {
@@ -8,7 +9,7 @@ public class Order
     
     public int Price { get; set; }
     
-    public string Size { get; set; }
+    public SizeEnum Size { get; set; }
     
     public float Offer { get; set; }
     

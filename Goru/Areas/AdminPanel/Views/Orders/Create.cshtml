@@ -1,4 +1,5 @@
-﻿@model Goru.Areas.AdminPanel.Models.Order.CreateOrderVM
+﻿@using Goru.Areas.AdminPanel.Enums
+@model Goru.Areas.AdminPanel.Models.Order.CreateOrderVM
 
 @{
     Layout = "~/Areas/AdminPanel/Views/Shared/_Layout.cshtml";
@@ -35,7 +36,12 @@
         <br/>
         <p>
             <label>Размер(S, M, L, XL...)</label><br/>
-            @Html.TextBoxFor(m => m.Size)
+            <select name="limit" class="form-select form-select-sm" onchange="this.form.submit()">
+                @foreach (var item in Enum.GetNames(typeof(SizeEnum)))
+                {
+                    <option value="@item">@item</option>
+                }
+            </select>
         </p>
         
 
