@@ -118,11 +118,6 @@ namespace Goru.Areas.AdminPanel.Controllers
         };
         #endregion
         
-        // TODO: Стелизовать страницы редактирования и создания
-        // TODO: теория. HTML. знать тэг <form>, <input> (все типы аттрибута type)
-        // TODO: теория. Cтруктуры данных. знать наизусть все 10 ( https://practicum.yandex.ru/blog/10-osnovnyh-struktur-dannyh/ )
-        // TODO: теория. с#. прочитай и готовым быть к вопросам статический класс, статический конструктор, статические методы
-        // TODO: теория. с#. Enum
         
         [HttpGet]
         public IActionResult Index([FromQuery]string searching, [FromQuery]int limit = 5, [FromQuery]int page = 1)
@@ -239,26 +234,42 @@ namespace Goru.Areas.AdminPanel.Controllers
                 Size = payload.Size,
             });
             
-            return View("Index");
+            return Redirect("Index");
         }
         
         
-        // GET: AdminPanel/Orders/23424/edit
         [HttpGet("{article}/edit")]
         public IActionResult Edit([FromRoute]int article)
         {
-            // TODO: Логика получения данных о товаре для заполнения формы
             
-            // return View( updateOrderVM );
-            return View();
+            var order = Orders.FirstOrDefault(p => p.Article == article);
+            UpdateOrderVM data = new UpdateOrderVM
+            {
+                Offer = order.Offer,
+                Article = order.Article,
+                Category = order.Category,
+                Name = order.Name,
+                Price = order.Price,
+                Size = order.Size,
+                
+            };
+            
+            return View(data);
         }
-        
         [HttpPut]
-        public IActionResult SaveChanges()
+        public IActionResult SaveChanges([FromRoute] int article, UpdateOrderVM update)
         {
             // TODO: Написать логику изменения о товаре Артикль брать из роута
             
-            return View();
+            var order = Orders.FirstOrDefault(x => x.Article == article);
+            order.Category = update.Category;
+            order.Name = update.Name;
+            order.Price = update.Price;
+            order.Offer = update.Offer;
+            order.Size = update.Size;
+            
+            
+            return Redirect("Index");
         }
         
         [HttpGet]

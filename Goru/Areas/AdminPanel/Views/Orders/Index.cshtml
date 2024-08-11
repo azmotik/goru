@@ -8,7 +8,7 @@
     
     ViewBag.Title = "Index";
     int from = (Model.Pagination.Page - 1) * Model.Pagination.Limit + 1, to = from + Model.Pagination.Limit - 1;
-    int start = Model.Pagination.StartPage, end = Model.Pagination.EndPage, total = Model.Pagination.Total, limit = Model.Pagination.Limit;
+    int total = Model.Pagination.Total, limit = Model.Pagination.Limit;
 }
 
 <div class="content">
@@ -20,7 +20,7 @@
             <div class="card-body">
                 <div id="datatable_wrapper" class="dataTables_wrapper dt-bootstrap5 no-footer">
                     
-                    @Html.ActionLink("Добавить товар", "Create", "Orders")
+                    
 
                     <form method="get" asp-area="AdminPanel" asp-action="Index" asp-controller="Orders">
                         <div class="row">
@@ -36,7 +36,11 @@
                                         </select> entries
                                     </label>
                                 </div>
+                            <div class="col-sm-12 col-md-6">    
+                                @Html.ActionLink("Добавить товар", "Create", "Orders")
                             </div>
+                            </div>
+                            
                             <div class="col-sm-12 col-md-6">
                                 <div id="datatable_filter" class="dataTables_filter">
                                     <label>

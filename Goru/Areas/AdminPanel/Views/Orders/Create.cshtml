@@ -36,7 +36,7 @@
         <br/>
         <p>
             <label>Размер(S, M, L, XL...)</label><br/>
-            <select name="limit" class="form-select form-select-sm" onchange="this.form.submit()">
+            <select name="size" class="form-select form-select-sm">
                 @foreach (var item in Enum.GetNames(typeof(SizeEnum)))
                 {
                     <option value="@item">@item</option>
@@ -45,7 +45,7 @@
         </p>
         
 
-        <input type="submit" value="Добавить"/>
+        <input type="submit" value="Добавить" onchange="this.form.submit()"/>
     </div>
 }
 

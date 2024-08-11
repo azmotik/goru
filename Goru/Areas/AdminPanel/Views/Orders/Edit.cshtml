@@ -1,13 +1,49 @@
-﻿
+﻿@using Goru.Areas.AdminPanel.Enums
+@model Goru.Areas.AdminPanel.Models.Order.UpdateOrderVM
+
+@{
+    Layout = "~/Areas/AdminPanel/Views/Shared/_Layout.cshtml";
+}
 
 @using(Html.BeginForm("SaveChanges", "Orders", FormMethod.Post))
 {
-    // @Html.TextBoxFor(m => m.Article)
-    <input type="text" placeholder="Введите Category" name="category"/>
-    <input type="text" placeholder="Введите Name" name="name" />
-    <input type="text" placeholder="Введите Offer" name="offer" />
-    <input type="text" placeholder="Введите Price" name="price" />
-    <input type="text" placeholder="Введите Size" name="size" />
-
-    <input type="submit" value="Добавить"/>
+    <div class="create-order-form">
+        <p>
+            <label>Артикль: </label>
+            @Html.DisplayFor(m => m.Article)
+        </p>
+    
+        <br/>
+        <p>
+            <label>Категория</label><br/>
+            @Html.TextBoxFor(m => m.Category)
+        </p>
+        <br/>
+        <p>
+            <label>Название</label><br/>
+            @Html.TextBoxFor(m => m.Name)
+        </p>
+        <br/>
+        <p>
+            <label>Размер скидки</label><br/>
+            @Html.TextBoxFor(m => m.Offer)
+        </p>
+        <br/>
+        <p>
+            <label>Цена</label><br/>
+            @Html.TextBoxFor(m => m.Price)
+        </p>
+        <br/>
+        <p>
+            <label>Размер(S, M, L, XL...)</label><br/>
+            <select name="limit" class="form-select form-select-sm">
+                @foreach (var item in Enum.GetNames(typeof(SizeEnum)))
+                {
+                    <option value="@item">@item</option>
+                }
+            </select>
+        </p>
+    
+        <input type="submit" value="Изменить" onchange="this.form.submit()"/>
+    </div>
 }
