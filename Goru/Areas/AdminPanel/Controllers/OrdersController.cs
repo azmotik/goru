@@ -256,12 +256,16 @@ namespace Goru.Areas.AdminPanel.Controllers
             
             return View(data);
         }
-        [HttpPut]
-        public IActionResult SaveChanges([FromRoute] int article, UpdateOrderVM update)
+        
+        //  [HttpPut]
+        [HttpPost]
+        public IActionResult SaveChanges([FromQuery] int article, UpdateOrderVM update)
         {
-            // TODO: Написать логику изменения о товаре Артикль брать из роута
+            // TODO: article брать из роута [FromQuery] -> [FromRoute] 
             
             var order = Orders.FirstOrDefault(x => x.Article == article);
+            if(order == null) return Redirect("Index");
+            
             order.Category = update.Category;
             order.Name = update.Name;
             order.Price = update.Price;
