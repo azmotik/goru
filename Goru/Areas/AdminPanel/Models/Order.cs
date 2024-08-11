@@ -13,6 +13,8 @@ public class Order
     
     public float Offer { get; set; }
     
-    public string Category { get; set; }
+    public int CategoryId { get; set; }
+    
+    // Телефон
 }
 

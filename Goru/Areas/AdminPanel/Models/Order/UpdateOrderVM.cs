@@ -32,5 +32,5 @@ public class UpdateOrderVM
     /// <summary>
     /// Категория товара
     /// </summary>
-    public string Category { get; set; }
+    public int CategoryId { get; set; }
 }

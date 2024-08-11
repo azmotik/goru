@@ -1,5 +1,7 @@
 ﻿@using Goru.Areas.AdminPanel.Models
 @using Goru.Areas.AdminPanel.Controllers
+@using Goru.Data
+@using Microsoft.AspNetCore.Mvc.TagHelpers
 @model OrdersVm
 
 @{
@@ -77,7 +79,7 @@
                                         <td>$@order.Price</td>
                                         <td>@order.Offer%</td>
                                         <td>@order.Size</td>
-                                        <td>@order.Category</td>
+                                        <td>@DataTables.Categories.SingleOrDefault(p => p.Id == order.CategoryId).Name</td>
                                         <td>
 
                                             @Html.ActionLink("Edit", "Edit", "Orders", new {article = @order.Article})

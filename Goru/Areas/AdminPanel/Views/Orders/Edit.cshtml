@@ -1,4 +1,5 @@
 ﻿@using Goru.Areas.AdminPanel.Enums
+@using Goru.Data
 @model Goru.Areas.AdminPanel.Models.Order.UpdateOrderVM
 
 @{
@@ -16,7 +17,12 @@
         <br/>
         <p>
             <label>Категория</label><br/>
-            @Html.TextBoxFor(m => m.Category)
+            <select name="categoryId" class="form-select form-select-sm">
+                @foreach (var item in DataTables.Categories)
+                {
+                    <option value="@item.Id">@item.Name</option>
+                }
+            </select>
         </p>
         <br/>
         <p>
