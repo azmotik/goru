@@ -1,6 +1,6 @@
 ﻿namespace Goru.Areas.AdminPanel.Models.Category;
 
-public class Category
+public class UpdateCategoryVM
 {
     /// <summary>
     /// Id категории

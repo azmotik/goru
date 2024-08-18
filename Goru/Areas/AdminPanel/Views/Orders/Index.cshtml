@@ -1,5 +1,4 @@
 ﻿@using Goru.Areas.AdminPanel.Models
-@using Goru.Areas.AdminPanel.Controllers
 @using Goru.Data
 @using Microsoft.AspNetCore.Mvc.TagHelpers
 @model OrdersVm
@@ -12,6 +11,14 @@
     int from = (Model.Pagination.Page - 1) * Model.Pagination.Limit + 1, to = from + Model.Pagination.Limit - 1;
     int total = Model.Pagination.Total, limit = Model.Pagination.Limit;
 }
+
+<ul class="list-unstyled topnav-menu topnav-menu-left mb-0">
+
+    <li>
+        <h4 class="page-title-main">Orders</h4>
+    </li>
+
+</ul>
 
 <div class="content">
     <!-- Start Content-->
@@ -93,8 +100,6 @@
                     </div>
                     <div class="row">
                         <div class="col-sm-12 col-md-5">
-
-                            <!-- TODO: Подумать как отрефакторить -->
                             
                             @if (to > total)
                             {

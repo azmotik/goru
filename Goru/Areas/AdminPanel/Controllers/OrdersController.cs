@@ -121,8 +121,8 @@ namespace Goru.Areas.AdminPanel.Controllers
 
             if (order != null)
             {
-                
-                // Соощение что с таким Article товар уже создан 
+
+                return View("Error");
             }
             
             DataTables.Orders.Add(new Order()
@@ -139,7 +139,7 @@ namespace Goru.Areas.AdminPanel.Controllers
         }
         
         
-        [HttpGet("{article}/edit")]
+        [HttpGet("orders/{article}/edit")]
         public IActionResult Edit([FromRoute]int article)
         {
             

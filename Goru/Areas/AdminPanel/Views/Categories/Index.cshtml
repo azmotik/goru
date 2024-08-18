@@ -1,0 +1,81 @@
+﻿@using Goru.Areas.AdminPanel.Models
+@using Goru.Areas.AdminPanel.Controllers
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@model CategoriesVM
+
+@{
+    Layout = "~/Areas/AdminPanel/Views/Shared/_Layout.cshtml";
+    short[] arr = [5, 10, 15, 20, 25];
+    
+}
+
+<ul class="list-unstyled topnav-menu topnav-menu-left mb-0">
+
+    <li>
+        <h4 class="page-title-main">Categories</h4>
+    </li>
+
+</ul>
+
+<div class="content">
+    <!-- Start Content-->
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+            <div class="card">
+            <div class="card-body">
+                <div id="datatable_wrapper" class="dataTables_wrapper dt-bootstrap5 no-footer">
+                    
+                    
+
+                    <form method="get" asp-area="AdminPanel" asp-action="Index" asp-controller="Categories">
+                        <div class="row">
+                            <div class="col-sm-12 col-md-6">
+                            <div class="col-sm-12 col-md-6">    
+                                @Html.ActionLink("Добавить категорию", "Create", "Categories")
+                            </div>
+                            </div>
+                            
+                            <div class="col-sm-12 col-md-6">
+                                <div id="datatable_filter" class="dataTables_filter">
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <table id="datatable" class="table table-bordered dt-responsive table-responsive nowrap dataTable no-footer dtr-inline" aria-describedby="datatable_info" style="width: 1570px;">
+                                <thead>
+                                <tr>
+                                    <th class="sorting sorting_asc" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" style="width: 258.4px;" aria-sort="ascending" aria-label="Name: activate to sort column descending">Id</th>
+                                    <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" style="width: 393.4px;" aria-label="Position: activate to sort column ascending">Name</th>
+                                    <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" style="width: 202.4px;" aria-label="Office: activate to sort column ascending">ParentId</th>
+                                    <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" style="width: 161.4px;" aria-label="Salary: activate to sort column ascending">Actions</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+
+                                @foreach (var category in Model.Categories)
+                                {
+                                    <tr>
+                                        <td>@category.Id</td>
+                                        <td>@category.Name</td>
+                                        <td>@category.ParentId</td>
+                                        <td>
+                                            @Html.ActionLink("Edit", "Edit", "Categories", new {id = @category.Id})
+                                            @Html.ActionLink("Delete", "Delete", "Categories", new {id = @category.Id})
+                                        </td>
+                                    </tr>
+                                }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                    </div>
+                </div>
+            </div>
+        </div> <!-- end row -->
+    </div> <!-- container -->
+</div> <!-- content -->

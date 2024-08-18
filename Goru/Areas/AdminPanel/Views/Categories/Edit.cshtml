@@ -1,0 +1,29 @@
+﻿@using Goru.Data
+@model Goru.Areas.AdminPanel.Models.Category.UpdateCategoryVM
+
+@{
+    Layout = "~/Areas/AdminPanel/Views/Shared/_Layout.cshtml";
+}
+
+@using(Html.BeginForm("SaveChanges", "Categories", new{ id = Model.Id }, FormMethod.Post))
+{
+    <div class="create-order-form">
+        <p>
+            <label>Id: </label>
+            @Html.DisplayFor(m => m.Id)
+        </p>
+        <br/>
+        <p>
+            <label>Название</label><br/>
+            @Html.TextBoxFor(m => m.Name)
+        </p>
+        <br/>
+        <p>
+            <label>Id родителя</label><br/>
+            @Html.TextBoxFor(m => m.ParentId)
+        </p>
+        
+
+        <input type="submit" value="Изменить" onchange="this.form.submit()"/>
+    </div>
+}

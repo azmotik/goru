@@ -9,9 +9,16 @@ public static class DataTables
     public static List<Category> Categories = new()
         {
             new Category() { Id = 1, Name = "Компьютеры"},
-            new Category() { Id = 2, Name = "Переферия", ParentId = 1},
+            new Category() { Id = 2, Name = "Периферия", ParentId = 1},
             new Category() { Id = 3, Name = "Клавиатуры", ParentId = 2},
-            new Category() { Id = 4, Name = "Компьютерные Мыши", ParentId = 2}
+            new Category() { Id = 4, Name = "Компьютерные Мыши", ParentId = 2},
+            new Category() { Id = 5, Name = "Геймпады", ParentId = 2},
+            new Category() { Id = 6, Name = "Наушники", ParentId = 2},
+            new Category() { Id = 7, Name = "Микрофоны", ParentId = 2},
+            new Category() { Id = 8, Name = "Телефоны"},
+            new Category() { Id = 9, Name = "Чехлы", ParentId = 8},
+            new Category() { Id = 10, Name = "Зарядные устройства", ParentId = 8},
+            new Category() { Id = 11, Name = "Защитные стёкла", ParentId = 8},
         };
         
     public static List<Order> Orders = new()

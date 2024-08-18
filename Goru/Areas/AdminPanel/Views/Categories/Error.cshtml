@@ -1,0 +1,33 @@
+﻿@{
+    Layout = "~/Areas/AdminPanel/Views/Shared/_Layout.cshtml";
+}
+
+<!-- Banner Start -->
+<section class="page-banner">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <span class="round-shape"></span>
+            </div>
+        </div>
+    </div>
+</section>    
+<!-- Banner End -->
+
+<!-- 404 Section Start -->
+<section class="error-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 offset-lg-2">
+                <div class="content-404 text-center">
+                    <h2>Такая категория уже существует</h2>
+                    <a asp-area="AdminPanel" asp-controller="Categories" asp-action="Index">
+                        <i class="mdi mdi-view-dashboard"></i>
+                        <span>Вернуться</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- 404 Section End -->

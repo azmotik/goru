@@ -1,0 +1,32 @@
+﻿@using Goru.Data
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@model Goru.Areas.AdminPanel.Models.Category.CreateCategoryVM
+
+@{
+    Layout = "~/Areas/AdminPanel/Views/Shared/_Layout.cshtml";
+}
+
+
+@using(Html.BeginForm("Add", "Categories", FormMethod.Post))
+{
+    <div class="create-order-form">
+        <p>
+            <label>Id</label><br/>
+            @Html.TextBoxFor(m => m.Id)
+        </p>
+        <br/>
+        <p>
+            <label>Название</label><br/>
+            @Html.TextBoxFor(m => m.Name)
+        </p>
+        <br/>
+        <p>
+            <label>Id родителя</label><br/>
+            @Html.TextBoxFor(m => m.ParentId)
+        </p>
+        
+
+        <input type="submit" value="Добавить" onchange="this.form.submit()"/>
+    </div>
+}
+
