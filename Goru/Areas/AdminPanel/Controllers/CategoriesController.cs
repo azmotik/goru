@@ -20,6 +20,7 @@ public class CategoriesController : Controller
         };
         return View(result);
     }
+    
     // TODO: Выводить таблицу со всеми категориями (без пагинации)
     // TODO: Возможность Добавить категорию
     // TODO: Возможность Изменить информацию о категории
@@ -28,7 +29,7 @@ public class CategoriesController : Controller
     [HttpGet]
     public IActionResult Create()
     {
-        return View();
+        return View(new CreateCategoryVM());
     }
 
     [HttpPost]
@@ -38,8 +39,8 @@ public class CategoriesController : Controller
 
         if (category != null)
         {
-
-            return View("Error");
+            payload.IsError = true;
+            return View("Create", payload);
         }
         
         DataTables.Categories.Add(new Category()

@@ -16,4 +16,6 @@ public class CreateCategoryVM
     /// Id родителя категории
     /// </summary>
     public int ParentId { get; set; }
+
+    public bool IsError { get; set; } = false;
 }
